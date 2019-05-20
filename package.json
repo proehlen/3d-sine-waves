@@ -13,7 +13,9 @@
   "license": "ISC",
   "devDependencies": {
     "clean-webpack-plugin": "^2.0.2",
+    "css-loader": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.1",
     "ts-loader": "^6.0.1",
     "typescript": "^3.4.5",
     "webpack": "^4.32.0",
@@ -21,6 +23,6 @@
     "webpack-dev-server": "^3.4.1"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "@babylonjs/core": "^4.0.3"
   }
 }

@@ -1,10 +1,8 @@
-function component() {
-  const element = document.createElement('div');
-  const hello: string = 'Hello';
-  const typescript: string = 'Typescript';
-  element.innerHTML = [hello, typescript].join(' ');
+require('./style.css');
+import WavesUi from './ui/WavesUi';
 
-  return element;
-}
+const canvas = document.createElement('canvas');
+canvas.setAttribute("id", "renderCanvas");
+document.body.appendChild(canvas);
 
-document.body.appendChild(component());
+new WavesUi(canvas, 200);
