@@ -11,12 +11,10 @@ import { init as initMaterials } from './materials';
 
 // import '@babylonjs/core/Debug/debugLayer';
 // import '@babylonjs/inspector';
+
+import Gui from './Gui';
 import Wave from '../api/Wave';
 import WaveOrigin from './WaveOrigin';
-
-// import '@babylonjs/materials/simple/'
-
-// import '@babylonjs/materials/';
 
 // Required side effects to populate the Create methods on the mesh class. Without this,
 // the bundle would be smaller but the createXXX methods from mesh would not be accessible.
@@ -25,7 +23,7 @@ import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder';
 
 const ribbonName = 'ribbon';
 
-export default class WavesUi {
+export default class App {
   private _engine: Engine;
   private _scene: Scene;
   private _pathArray: Vector3[][];
@@ -34,6 +32,7 @@ export default class WavesUi {
   private _gizmoManager: GizmoManager;
   private _waves: Wave[];
   private _resolution: number; // Resolution as points per circle unit
+  private _gui: Gui;
 
 
   constructor(canvas: HTMLCanvasElement, resolution: number) {
@@ -92,6 +91,9 @@ export default class WavesUi {
     this._ribbon = MeshBuilder.CreateRibbon(
       ribbonName, {pathArray: this._pathArray, sideOrientation: Mesh.DOUBLESIDE, updatable: true}, this._scene);
 
+    // Set up GUI
+    this._gui = new Gui(() => this._addWave());
+
     // Render every frame
     this._engine.runRenderLoop(() => {
         this._scene.render();
@@ -100,9 +102,11 @@ export default class WavesUi {
     // Init waves with single random wave
     this._waves = [];
     this._addWave();
+
   }
 
   private _addWave() {
+    debugger;
     const wave = new Wave(
       Math.round(this._resolution * Math.random()),
       Math.round(this._resolution * Math.random()),

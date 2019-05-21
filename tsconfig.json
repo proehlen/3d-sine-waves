@@ -20,7 +20,11 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    "types": [
+        "@babylonjs/core",
+        "@babylonjs/gui",
+    ],
   },
   "include": [
     "src/**/*.ts",
