@@ -1,5 +1,3 @@
-import core from '@babylonjs/core';
-
 import { Engine } from '@babylonjs/core/Engines/engine';
 import { Scene } from '@babylonjs/core/scene';
 import { Vector3 } from '@babylonjs/core/Maths/math';
@@ -19,6 +17,7 @@ import WaveOrigin from './WaveOrigin';
 // Required side effects to populate the Create methods on the mesh class. Without this,
 // the bundle would be smaller but the createXXX methods from mesh would not be accessible.
 import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder';
+import { PointerEventTypes } from '@babylonjs/core';
 
 
 const ribbonName = 'ribbon';
@@ -94,6 +93,22 @@ export default class App {
     // Set up GUI
     this._gui = new Gui(() => this._addWave());
 
+    // On wave origin select, set selected wave
+    this._scene.onPointerObservable.add((pointerInfo) => {
+      if (pointerInfo.type === PointerEventTypes.POINTERDOWN) {
+        const { pickInfo } = pointerInfo;
+        if(pickInfo && pickInfo.hit && pickInfo.pickedMesh) {
+          const [maybeWaveOrigin, maybeWaveId] = pickInfo.pickedMesh.id.split('-');
+          if (maybeWaveOrigin === 'waveOrigin') {
+            const wave = this._waves.get(Number(maybeWaveId));
+            if (wave) {
+              this._gui.selectedWave = wave;
+            }
+          }
+        }
+      }
+    });
+
     // Render every frame
     this._engine.runRenderLoop(() => {
         this._scene.render();
@@ -112,15 +127,24 @@ export default class App {
     const wave = new Wave(
       randomOriginXorY(),
       randomOriginXorY(),
-      3,
-      18,
+      Math.random() * 3,
+      Math.random() * 18,
       this._resolution,
       Math.PI / 2,
       this.update.bind(this),
     );
     this._waves.set(wave.id, wave);
-    const waveOrigin = new WaveOrigin(wave, this._scene, this._gizmoManager.gizmos.positionGizmo);
+    const waveOrigin = new WaveOrigin(
+      wave,
+      this._scene,
+      this._gizmoManager,
+      // (wave: Wave) => {
+      //   debugger;
+      //   this._gui.selectedWave = wave;
+      // },
+    );
     this._waveOrigins.set(wave, waveOrigin);
+    this._gui.selectedWave = wave;
     this.update();
   }
 

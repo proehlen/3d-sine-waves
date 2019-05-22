@@ -1,28 +1,29 @@
-import * as GUI from '@babylonjs/gui';
+import Wave from '@/api/Wave';
+import SelectedWave from './SelectedWave';
+import { Container, AdvancedDynamicTexture, Control, Button } from '@babylonjs/gui';
 
 // import from '@babylonjs/core/shaders/';
 
 export default class Gui {
   private _onAdd: () => void;
 
+  private _selectedWave: SelectedWave;
+
   constructor(onAdd: () => void) {
     this._onAdd = onAdd;
     // GUI
-    const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('UI');
+    const advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI('UI');
 
-    const containerWave = new GUI.Container('containerWave');
-    containerWave.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-    containerWave.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-    containerWave.background = "white";
-    // containerWave.heightInPixels = 400;
-    // containerWave.widthInPixels = 200;
-    containerWave.adaptWidthToChildren = true;
-    containerWave.adaptHeightToChildren = true;
-    containerWave.paddingLeftInPixels = 10;
-    containerWave.paddingTopInPixels = 10;
-    advancedTexture.addControl(containerWave);  
+    const toolbar = new Container('toolbarWave');
+    toolbar.verticalAlignment = Control.VERTICAL_ALIGNMENT_TOP;
+    toolbar.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
+    toolbar.background = "white";
+    toolbar.adaptWidthToChildren = true;
+    toolbar.adaptHeightToChildren = true;
+    toolbar.paddingLeftInPixels = 10;
+    toolbar.paddingTopInPixels = 10;
 
-    const buttonAddWave = GUI.Button.CreateSimpleButton("buttonAddWave", "Add");
+    const buttonAddWave = Button.CreateSimpleButton("buttonAddWave", "Add");
     buttonAddWave.width = "150px"
     buttonAddWave.height = "40px";
     buttonAddWave.color = "white";
@@ -31,6 +32,15 @@ export default class Gui {
     buttonAddWave.onPointerUpObservable.add(() => {
       this._onAdd();
     });
-    containerWave.addControl(buttonAddWave);  
+    toolbar.addControl(buttonAddWave);  
+
+
+    advancedTexture.addControl(toolbar);  
+
+    this._selectedWave = new SelectedWave(advancedTexture);
+  }
+
+  set selectedWave(wave: Wave) {
+    this._selectedWave.wave = wave;
   }
 }
