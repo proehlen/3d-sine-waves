@@ -6,7 +6,6 @@ export default class Gui {
   private _onAdd: () => void;
 
   constructor(onAdd: () => void) {
-    debugger;
     this._onAdd = onAdd;
     // GUI
     const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI('UI');
@@ -30,7 +29,6 @@ export default class Gui {
     buttonAddWave.cornerRadius = 4;
     buttonAddWave.background = "green";
     buttonAddWave.onPointerUpObservable.add(() => {
-      debugger;
       this._onAdd();
     });
     containerWave.addControl(buttonAddWave);  

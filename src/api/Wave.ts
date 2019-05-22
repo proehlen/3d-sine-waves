@@ -16,6 +16,7 @@ export default class Wave {
   private _amplitude: number;
   private _resolution: number;
   private _phase: number;
+  private _onChange?: () => void;
 
   constructor(
     originX: number,
@@ -24,6 +25,7 @@ export default class Wave {
     amplitude: number,
     resolutionAsPointsPerCircleUnit: number,
     phase?: number,
+    onChange?: () => void,
   ) {
     this._id = Wave.getNextId();
     this._originX = originX;
@@ -32,6 +34,7 @@ export default class Wave {
     this._amplitude = amplitude;
     this._resolution = resolutionAsPointsPerCircleUnit;
     this._phase = phase || (Math.PI / 2);
+    this._onChange = onChange;
   }
 
   get id(): number {
@@ -42,16 +45,8 @@ export default class Wave {
     return this._originX;
   }
 
-  set originX(originX: number) {
-    this._originX = originX;
-  }
-
   get originY(): number {
     return this._originY;
-  }
-
-  set originY(originY: number) {
-    this._originY = originY;
   }
 
   get amplitude(): number {
@@ -60,6 +55,7 @@ export default class Wave {
 
   set amplitude(amplitude: number) {
     this._amplitude = amplitude;
+    this._fireChange();
   }
 
   get frequency(): number {
@@ -68,6 +64,7 @@ export default class Wave {
 
   set frequency(frequency: number) {
     this._frequency = frequency;
+    this._fireChange();
   }
 
   get phase(): number {
@@ -76,6 +73,13 @@ export default class Wave {
 
   set phase(phase: number) {
     this._phase = phase;
+    this._fireChange();
+  }
+
+  private _fireChange() {
+    if (this._onChange) {
+      this._onChange();
+    }
   }
 
   public getHeightAtPoint(pointX: number, pointY: number): number {
@@ -85,4 +89,11 @@ export default class Wave {
     const time = (distance / this._resolution);
     return this._amplitude * Math.sin(((2 * Math.PI) * this._frequency * time) + this._phase);
   }
+
+  public setOrigin(originX: number, originY: number) {
+    this._originX = originX;
+    this._originY = originY;
+    this._fireChange();
+  }
+
 }

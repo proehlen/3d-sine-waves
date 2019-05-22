@@ -28,9 +28,9 @@ export default class App {
   private _scene: Scene;
   private _pathArray: Vector3[][];
   private _ribbon: Mesh;
-  private _waveOrigins: WaveOrigin[];
+  private _waveOrigins: Map<Wave, WaveOrigin>;
   private _gizmoManager: GizmoManager;
-  private _waves: Wave[];
+  private _waves: Map<number, Wave>;
   private _resolution: number; // Resolution as points per circle unit
   private _gui: Gui;
 
@@ -85,7 +85,7 @@ export default class App {
     }
 
     // Line meshes with gizmos for wave origins
-    this._waveOrigins = [];
+    this._waveOrigins = new Map();
 
     // Create ribbon with updatable parameter set to true for later changes
     this._ribbon = MeshBuilder.CreateRibbon(
@@ -100,22 +100,27 @@ export default class App {
     });
 
     // Init waves with single random wave
-    this._waves = [];
+    this._waves = new Map();
     this._addWave();
 
   }
 
   private _addWave() {
-    debugger;
+    const randomOriginXorY = (): number => {
+      return Math.round((this._resolution * 2) * Math.random() - this._resolution);
+    };
     const wave = new Wave(
-      Math.round(this._resolution * Math.random()),
-      Math.round(this._resolution * Math.random()),
+      randomOriginXorY(),
+      randomOriginXorY(),
       3,
       18,
       this._resolution,
       Math.PI / 2,
+      this.update.bind(this),
     );
-    this._waves.push(wave);
+    this._waves.set(wave.id, wave);
+    const waveOrigin = new WaveOrigin(wave, this._scene, this._gizmoManager.gizmos.positionGizmo);
+    this._waveOrigins.set(wave, waveOrigin);
     this.update();
   }
 
@@ -124,7 +129,7 @@ export default class App {
     for (const row of this._pathArray) {
       for (const cell of row) {
         let z = 0;
-        for (const wave of this._waves) {
+        for (const wave of this._waves.values()) {
           z += wave.getHeightAtPoint(cell.x, cell.y);
         }
         cell.z = z;
@@ -132,14 +137,14 @@ export default class App {
     }
     this._ribbon = MeshBuilder.CreateRibbon(ribbonName, { pathArray: this._pathArray, instance: this._ribbon });
 
-    // Show wave origins
-    this._waveOrigins.forEach((waveOrigin) => waveOrigin.dispose());
-    this._waveOrigins = this._waves
-      .map((wave) => new WaveOrigin(wave.originX, wave.originY, this._scene, this._gizmoManager.gizmos.positionGizmo));
+    // // Sync waves to waveorigins
+    // this._waveOrigins.forEach((waveOrigin) => waveOrigin.dispose());
+    // this._waveOrigins = Array.from(this._waves.values())
+    //   .map((wave) => new WaveOrigin(wave, this._scene, this._gizmoManager.gizmos.positionGizmo));
 
-    this._gizmoManager.attachableMeshes = this
-      ._waveOrigins
-      .map((waveOrigin) => waveOrigin.sphereMesh);
+    // this._gizmoManager.attachableMeshes = this
+    //   ._waveOrigins
+    //   .map((waveOrigin) => waveOrigin.sphereMesh);
   }
 
   public destroy(): void {
