@@ -45,8 +45,18 @@ export default class Wave {
     return this._originX;
   }
 
+  set originX(originX: number) {
+    this._originX = originX;
+    this._fireChange();
+  }
+
   get originY(): number {
     return this._originY;
+  }
+
+  set originY(originY: number) {
+    this._originY = originY;
+    this._fireChange();
   }
 
   get amplitude(): number {
@@ -95,5 +105,4 @@ export default class Wave {
     this._originY = originY;
     this._fireChange();
   }
-
 }

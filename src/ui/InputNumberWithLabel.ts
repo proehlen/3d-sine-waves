@@ -6,6 +6,7 @@ export default class InputNumberWithLabel {
   constructor(
     label: string,
     container: Container,
+    onChange: (value: number) => void,
     widthInPixels: number = 130,
     color: string = "black",
     background: string = "white",
@@ -14,8 +15,8 @@ export default class InputNumberWithLabel {
     const textBlock = new TextBlock(undefined, `${label}:`);
     container.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
     textBlock.color = color;
-    textBlock.paddingTopInPixels = 3;
-    textBlock.heightInPixels = 28;
+    textBlock.paddingTopInPixels = 5;
+    textBlock.heightInPixels = 30;
     container.addControl(textBlock);
     this._inputText = new InputText();
     this._inputText.color = color;
@@ -25,6 +26,7 @@ export default class InputNumberWithLabel {
     this._inputText.heightInPixels = 31;
     this._inputText.widthInPixels = widthInPixels;
     this._inputText.focusedBackground = focusedBackground;
+    this._inputText.onTextChangedObservable.add((eventData: InputText) => onChange(Number(eventData.text)));
     container.addControl(this._inputText);
   }
 
