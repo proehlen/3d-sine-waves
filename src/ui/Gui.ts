@@ -43,4 +43,8 @@ export default class Gui {
   set selectedWave(wave: Wave) {
     this._selectedWave.wave = wave;
   }
+
+  public update() {
+    this._selectedWave.update();
+  }
 }

@@ -127,8 +127,8 @@ export default class App {
     const wave = new Wave(
       randomOriginXorY(),
       randomOriginXorY(),
-      Math.random() * 3,
-      Math.random() * 18,
+      Math.random() * 2 + 1,
+      10,
       this._resolution,
       Math.PI / 2,
       this.update.bind(this),
@@ -161,7 +161,7 @@ export default class App {
     }
     this._ribbon = MeshBuilder.CreateRibbon(ribbonName, { pathArray: this._pathArray, instance: this._ribbon });
 
-    // // Sync waves to waveorigins
+    this._gui.update();
     // this._waveOrigins.forEach((waveOrigin) => waveOrigin.dispose());
     // this._waveOrigins = Array.from(this._waves.values())
     //   .map((wave) => new WaveOrigin(wave, this._scene, this._gizmoManager.gizmos.positionGizmo));
