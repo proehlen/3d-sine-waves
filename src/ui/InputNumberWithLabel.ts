@@ -26,7 +26,14 @@ export default class InputNumberWithLabel {
     this._inputText.heightInPixels = 31;
     this._inputText.widthInPixels = widthInPixels;
     this._inputText.focusedBackground = focusedBackground;
-    this._inputText.onTextChangedObservable.add((eventData: InputText) => onChange(Number(eventData.text)));
+    this._inputText.onKeyboardEventProcessedObservable.add(
+      (eventData: KeyboardEvent) => {
+        if (eventData.key === 'Enter') {
+          onChange(Number(this._inputText.text));
+        }
+      },
+    );
+    this._inputText.onBlurObservable.add((eventData: InputText) => onChange(Number(eventData.text)));
     container.addControl(this._inputText);
   }
 
