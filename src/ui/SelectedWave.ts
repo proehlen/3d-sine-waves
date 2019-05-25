@@ -5,6 +5,7 @@ import InputNumberWithLabel from './InputNumberWithLabel';
 const panelHeight = 400;
 
 export default class SelectedWave {
+  private _container: Container;
   private _wave?: Wave;
   private _waveIdText: TextBlock;
   private _frequency: InputNumberWithLabel;
@@ -15,16 +16,14 @@ export default class SelectedWave {
 
   constructor(parent: AdvancedDynamicTexture, onRemove: (wave: Wave) => void, elementWidth: number) {
     const panelWidth = elementWidth + 20;
-    const container = new Container();
-    container.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
-    container.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
-    container.background = "white";
-    container.widthInPixels = panelWidth;
-    container.heightInPixels = panelHeight;
-    // container.adaptWidthToChildren = true;
-    // container.adaptHeightToChildren = true;
-    container.paddingLeftInPixels = 10;
-    container.paddingBottomInPixels = 10;
+    this._container = new Container();
+    this._container.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
+    this._container.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
+    this._container.background = "white";
+    this._container.widthInPixels = panelWidth;
+    this._container.heightInPixels = panelHeight;
+    this._container.paddingLeftInPixels = 10;
+    this._container.paddingBottomInPixels = 10;
 
     const stack = new StackPanel();
     stack.isVertical = true;
@@ -108,13 +107,18 @@ export default class SelectedWave {
     });
     stack.addControl(buttonRemoveWave);  
 
-    container.addControl(stack);
-    parent.addControl(container);
+    this._container.addControl(stack);
+    parent.addControl(this._container);
   }
 
-  set wave(wave: Wave) {
+  set wave(wave: Wave | undefined) {
     this._wave = wave;
-    this.update();
+    if (this._wave) {
+      this._container.isVisible = true;
+      this.update();
+    } else {
+      this._container.isVisible = false;
+    }
   }
 
   public update() {

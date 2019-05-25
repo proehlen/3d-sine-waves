@@ -43,7 +43,7 @@ export default class Gui {
     );
   }
 
-  set selectedWave(wave: Wave) {
+  set selectedWave(wave: Wave | undefined) {
     this._selectedWave.wave = wave;
   }
 

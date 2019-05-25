@@ -152,6 +152,12 @@ export default class App {
   }
 
   _removeWave(wave: Wave) {
+    this._gui.selectedWave = undefined;
+    const waveOrigin = this._waveOrigins.get(wave);
+    if (waveOrigin) {
+      waveOrigin.dispose();
+    }
+    this._waveOrigins.delete(wave);
     this._waves.delete(wave.id);
     this.update();
   }
