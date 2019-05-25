@@ -91,7 +91,10 @@ export default class App {
       ribbonName, {pathArray: this._pathArray, sideOrientation: Mesh.DOUBLESIDE, updatable: true}, this._scene);
 
     // Set up GUI
-    this._gui = new Gui(() => this._addWave());
+    this._gui = new Gui(
+      () => this._addWave(),
+      (wave: Wave) => this._removeWave(wave)
+    );
 
     // On wave origin select, set selected wave
     this._scene.onPointerObservable.add((pointerInfo) => {
@@ -145,6 +148,11 @@ export default class App {
     );
     this._waveOrigins.set(wave, waveOrigin);
     this._gui.selectedWave = wave;
+    this.update();
+  }
+
+  _removeWave(wave: Wave) {
+    this._waves.delete(wave.id);
     this.update();
   }
 

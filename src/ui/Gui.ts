@@ -2,15 +2,12 @@ import Wave from '@/api/Wave';
 import SelectedWave from './SelectedWave';
 import { Container, AdvancedDynamicTexture, Control, Button } from '@babylonjs/gui';
 
-// import from '@babylonjs/core/shaders/';
+const elementWidth = 160;
 
 export default class Gui {
-  private _onAdd: () => void;
-
   private _selectedWave: SelectedWave;
 
-  constructor(onAdd: () => void) {
-    this._onAdd = onAdd;
+  constructor(onAdd: () => void, onRemove: (wave: Wave) => void) {
     // GUI
     const advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI('UI');
 
@@ -24,20 +21,26 @@ export default class Gui {
     toolbar.paddingTopInPixels = 10;
 
     const buttonAddWave = Button.CreateSimpleButton("buttonAddWave", "Add");
-    buttonAddWave.width = "150px"
+    buttonAddWave.widthInPixels = elementWidth;
     buttonAddWave.height = "40px";
     buttonAddWave.color = "white";
     buttonAddWave.cornerRadius = 4;
     buttonAddWave.background = "green";
     buttonAddWave.onPointerUpObservable.add(() => {
-      this._onAdd();
+      onAdd();
     });
     toolbar.addControl(buttonAddWave);  
 
 
     advancedTexture.addControl(toolbar);  
 
-    this._selectedWave = new SelectedWave(advancedTexture);
+    this._selectedWave = new SelectedWave(
+      advancedTexture,
+      (wave: Wave) => {
+        onRemove(wave);
+      },
+      elementWidth,
+    );
   }
 
   set selectedWave(wave: Wave) {

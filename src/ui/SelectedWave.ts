@@ -1,6 +1,8 @@
-import { Container, Control, TextBlock, AdvancedDynamicTexture, StackPanel, InputText } from '@babylonjs/gui';
+import { Container, Control, TextBlock, AdvancedDynamicTexture, StackPanel, InputText, Button } from '@babylonjs/gui';
 import Wave from '@/api/Wave';
 import InputNumberWithLabel from './InputNumberWithLabel';
+
+const panelHeight = 400;
 
 export default class SelectedWave {
   private _wave?: Wave;
@@ -11,13 +13,14 @@ export default class SelectedWave {
   private _originX: InputNumberWithLabel;
   private _originY: InputNumberWithLabel;
 
-  constructor(parent: AdvancedDynamicTexture) {
+  constructor(parent: AdvancedDynamicTexture, onRemove: (wave: Wave) => void, elementWidth: number) {
+    const panelWidth = elementWidth + 20;
     const container = new Container();
     container.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
     container.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
     container.background = "white";
-    container.widthInPixels = 150;
-    container.heightInPixels = 370;
+    container.widthInPixels = panelWidth;
+    container.heightInPixels = panelHeight;
     // container.adaptWidthToChildren = true;
     // container.adaptHeightToChildren = true;
     container.paddingLeftInPixels = 10;
@@ -33,37 +36,77 @@ export default class SelectedWave {
     stack.addControl(this._waveIdText);
 
     // Frequency
-    this._frequency = new InputNumberWithLabel('Frequency', stack, (frequency) => {
-      if (this._wave) {
-        this._wave.frequency = frequency;
-      }
-    });
+    this._frequency = new InputNumberWithLabel(
+      'Frequency',
+      stack,
+      (frequency) => {
+        if (this._wave) {
+          this._wave.frequency = frequency;
+        }
+      },
+      elementWidth,
+    );
 
     // Amplitude
-    this._amplitude = new InputNumberWithLabel('Amplitude', stack, (amplitude) => {
-      if (this._wave) {
-        this._wave.amplitude = amplitude;
-      }
-    });
+    this._amplitude = new InputNumberWithLabel(
+      'Amplitude',
+      stack,
+      (amplitude) => {
+        if (this._wave) {
+          this._wave.amplitude = amplitude;
+        }
+      },
+      elementWidth,
+    );
 
     // Phase
-    this._phase = new InputNumberWithLabel('Phase', stack, (phase) => {
-      if (this._wave) {
-        this._wave.phase = phase;
-      }
-    });
+    this._phase = new InputNumberWithLabel(
+      'Phase',
+      stack,
+      (phase) => {
+        if (this._wave) {
+          this._wave.phase = phase;
+        }
+      },
+      elementWidth,
+    );
 
     // Origin X/Y
-    this._originX = new InputNumberWithLabel('Origin X', stack, (originX) => {
+    this._originX = new InputNumberWithLabel(
+      'Origin X',
+      stack,
+      (originX) => {
+        if (this._wave) {
+          this._wave.originX = originX;
+        }
+      },
+      elementWidth,
+    );
+    this._originY = new InputNumberWithLabel(
+      'Origin Y',
+      stack,
+      (originY) => {
+        if (this._wave) {
+          this._wave.originY = originY;
+        }
+      },
+      elementWidth,
+    );
+
+    // Remove button
+    const buttonRemoveWave = Button.CreateSimpleButton("buttonRemoveWave", "Remove");
+    buttonRemoveWave.paddingTopInPixels = 8;
+    buttonRemoveWave.widthInPixels = elementWidth;
+    buttonRemoveWave.height = "40px";
+    buttonRemoveWave.background = "red";
+    buttonRemoveWave.color = "white";
+    buttonRemoveWave.cornerRadius = 4;
+    buttonRemoveWave.onPointerUpObservable.add(() => {
       if (this._wave) {
-        this._wave.originX = originX;
+        onRemove(this._wave);
       }
     });
-    this._originY = new InputNumberWithLabel('Origin Y', stack, (originY) => {
-      if (this._wave) {
-        this._wave.originY = originY;
-      }
-    });
+    stack.addControl(buttonRemoveWave);  
 
     container.addControl(stack);
     parent.addControl(container);

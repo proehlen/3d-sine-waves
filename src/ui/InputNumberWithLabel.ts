@@ -26,6 +26,7 @@ export default class InputNumberWithLabel {
     this._inputText.heightInPixels = 31;
     this._inputText.widthInPixels = widthInPixels;
     this._inputText.focusedBackground = focusedBackground;
+    this._inputText.onFocusSelectAll = true;
     this._inputText.onKeyboardEventProcessedObservable.add(
       (eventData: KeyboardEvent) => {
         if (eventData.key === 'Enter') {
@@ -42,6 +43,6 @@ export default class InputNumberWithLabel {
   }
 
   set value(value: number) {
-    this._inputText.text = value.toFixed(3);
+    this._inputText.text = value.toString();
   }
 }
