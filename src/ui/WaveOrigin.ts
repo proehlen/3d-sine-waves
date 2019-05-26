@@ -38,8 +38,6 @@ export default class WaveOrigin {
     this._linePoints = [
       new Vector3(0, 0, -200),
       new Vector3(0, 0, 0),
-      // new Vector3(wave.originX, wave.originY, -100),
-      // new Vector3(wave.originX, wave.originY, 100),
     ];
     this._lineMesh = MeshBuilder.CreateLines('centerLine', { points: this._linePoints, updatable: false }, scene);
     this._lineMesh.parent = this._sphereMesh;
@@ -71,7 +69,6 @@ export default class WaveOrigin {
     this._sphereMesh.dispose();
     if (this._observable && this._positionGizmo) {
       this._positionGizmo.onDragEndObservable.remove(this._observable);
-      // this._positionGizmo.dispose();
       this._gizmoManager.attachToMesh(null);
     }
     this._isDisposed = true;

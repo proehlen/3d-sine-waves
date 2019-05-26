@@ -30,6 +30,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Waves',
+      template: 'src/index.html',
     })
   ],
   resolve: {

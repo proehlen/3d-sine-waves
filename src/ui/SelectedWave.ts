@@ -97,7 +97,7 @@ export default class SelectedWave {
     buttonRemoveWave.paddingTopInPixels = 8;
     buttonRemoveWave.widthInPixels = elementWidth;
     buttonRemoveWave.height = "40px";
-    buttonRemoveWave.background = "red";
+    buttonRemoveWave.background = "darkred";
     buttonRemoveWave.color = "white";
     buttonRemoveWave.cornerRadius = 4;
     buttonRemoveWave.onPointerUpObservable.add(() => {
