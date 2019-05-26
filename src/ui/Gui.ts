@@ -1,6 +1,9 @@
+import { Container, AdvancedDynamicTexture, Control, Button } from '@babylonjs/gui';
+
 import Wave from '@/api/Wave';
 import SelectedWave from './SelectedWave';
-import { Container, AdvancedDynamicTexture, Control, Button } from '@babylonjs/gui';
+import Settings from './Settings';
+
 
 const elementWidth = 160;
 
@@ -39,6 +42,11 @@ export default class Gui {
       (wave: Wave) => {
         onRemove(wave);
       },
+      elementWidth,
+    );
+
+    new Settings(
+      advancedTexture,
       elementWidth,
     );
   }
