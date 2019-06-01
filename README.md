@@ -1,7 +1,3 @@
----
-permalink: /index.html
----
-
 # Waves
 
 This app renders sine waves in 3D. 
