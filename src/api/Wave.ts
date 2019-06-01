@@ -117,8 +117,11 @@ export default class Wave {
   }
 
   public setOrigin(originX: number, originY: number) {
+    const changed = this._originX !== originX || this._originY !== originY;
     this._originX = originX;
     this._originY = originY;
-    this._fireChange();
+    if (changed) {
+      this._fireChange();
+    }
   }
 }

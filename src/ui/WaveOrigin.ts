@@ -3,7 +3,6 @@ import { Vector3 } from '@babylonjs/core/Maths/math';
 import { Mesh } from '@babylonjs/core/Meshes/mesh';
 import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder';
 import { PositionGizmo, GizmoManager } from '@babylonjs/core/Gizmos';
-import { Observable } from '@babylonjs/core/Misc';
 import Wave from '../api/Wave';
 
 export default class WaveOrigin {

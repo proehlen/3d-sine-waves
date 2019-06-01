@@ -186,7 +186,7 @@ export default class App {
     }
     this._ribbon = MeshBuilder.CreateRibbon(ribbonName, { pathArray: this._pathArray, instance: this._ribbon });
 
-    for (const [, waveOrigin] of this._waveOrigins) {
+    for (const [wave, waveOrigin] of this._waveOrigins) {
       waveOrigin.update();
     }
     this._gui.update();
