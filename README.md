@@ -1,6 +1,6 @@
 # Waves
 
-This app renders sine waves in 3D. 
+This app renders sine waves in 3D.  Demo at https://proehlen.github.io/3d-sine-waves/ .
 
 ## Dev setup
 
