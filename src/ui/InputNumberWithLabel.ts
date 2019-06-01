@@ -47,22 +47,32 @@ export default class InputNumberWithLabel {
 
     // Increase button
     const buttonIncrease = Button.CreateSimpleButton('buttonIncrease', '+');
-    buttonIncrease.widthInPixels = 18;
-    buttonIncrease.heightInPixels = 18;
-    buttonIncrease.background = 'lightgrey';
+    buttonIncrease.widthInPixels = 17;
+    buttonIncrease.heightInPixels = 17;
     buttonIncrease.fontSize = 12;
     buttonIncrease.fontWeight = 'bold';
+    buttonIncrease.background = '#FAFAFA';
+    buttonIncrease.thickness = 1;
+    buttonIncrease.color = "darkgrey";
+    if (buttonIncrease.textBlock) {
+      buttonIncrease.textBlock.color = "black";
+    }
     buttonIncrease.onPointerUpObservable.add(() => {
       onChange(Number(this._inputText.text) + step);
     });
 
     // Decrease button
     const buttonDecrease = Button.CreateSimpleButton('buttonDecrease', '-');
-    buttonDecrease.widthInPixels = 18;
-    buttonDecrease.heightInPixels = 18;
-    buttonDecrease.background = 'lightgrey';
+    buttonDecrease.widthInPixels = 17;
+    buttonDecrease.heightInPixels = 17;
     buttonDecrease.fontSize = 12;
     buttonDecrease.fontWeight = 'bold';
+    buttonDecrease.background = '#FAFAFA';
+    buttonDecrease.thickness = 1;
+    buttonDecrease.color = "darkgrey";
+    if (buttonDecrease.textBlock) {
+      buttonDecrease.textBlock.color = "black";
+    }
     buttonDecrease.onPointerUpObservable.add(() => {
       onChange(Number(this._inputText.text) - step);
     });
@@ -79,10 +89,10 @@ export default class InputNumberWithLabel {
     horizontalStack.heightInPixels = 34;
     horizontalStack.verticalAlignment = Control.VERTICAL_ALIGNMENT_CENTER;
     horizontalStack.addControl(this._inputText);
+    horizontalStack.addControl(verticalStack);
     if (unitText) {
       horizontalStack.addControl(unitText);
     }
-    horizontalStack.addControl(verticalStack);
 
     container.addControl(horizontalStack);
   }

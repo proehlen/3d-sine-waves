@@ -19,7 +19,7 @@ export default class SelectedWave {
     this._container = new Container();
     this._container.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
     this._container.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
-    this._container.background = 'white';
+    this._container.background = '#eaeaFF';
     this._container.widthInPixels = panelWidth;
     this._container.heightInPixels = panelHeight;
     this._container.paddingLeftInPixels = 10;
@@ -129,6 +129,7 @@ export default class SelectedWave {
     buttonRemoveWave.background = 'darkred';
     buttonRemoveWave.color = 'white';
     buttonRemoveWave.cornerRadius = 4;
+    buttonRemoveWave.thickness = 0;
     buttonRemoveWave.onPointerUpObservable.add(() => {
       if (this._wave) {
         onRemove(this._wave);

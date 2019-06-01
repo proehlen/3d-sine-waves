@@ -34,7 +34,7 @@ export default class Gui {
 
     const buttonAddWave = Button.CreateSimpleButton('buttonAddWave', 'Add Wave');
     buttonAddWave.widthInPixels = elementWidth;
-    buttonAddWave.height = '40px';
+    buttonAddWave.heightInPixels = 40;
     buttonAddWave.color = 'white';
     buttonAddWave.cornerRadius = 4;
     buttonAddWave.thickness = 0;
