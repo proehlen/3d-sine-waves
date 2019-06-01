@@ -1,13 +1,15 @@
 # Waves
 
-This app renders sine waves in 3D.  Demo at https://proehlen.github.io/3d-sine-waves/ .
+This web app generates sine waves with customizable frequency, amplitude etc and renders them in 3D with constructive and destructive interference. 
+
+Live demo at https://proehlen.github.io/3d-sine-waves/ .
 
 ## Dev setup
 
 1. `npm install`
 2. Building:
-  * `npm start` (to dev) -or-
-  * `npm run build` (to build)
+    * `npm start` (dev) - OR -
+    * `npm run build` (build)
 
 ## Instructions
 
