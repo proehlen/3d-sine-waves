@@ -19,7 +19,7 @@ export default class SelectedWave {
     this._container = new Container();
     this._container.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
     this._container.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
-    this._container.background = "white";
+    this._container.background = 'white';
     this._container.widthInPixels = panelWidth;
     this._container.heightInPixels = panelHeight;
     this._container.paddingLeftInPixels = 10;
@@ -29,9 +29,9 @@ export default class SelectedWave {
     stack.isVertical = true;
 
     this._waveIdText = new TextBlock('selectedWaveId', 'Wave');
-    this._waveIdText.color = "black";
+    this._waveIdText.color = 'black';
     this._waveIdText.heightInPixels = 24;
-    this._waveIdText.fontWeight = "Bold";
+    this._waveIdText.fontWeight = 'Bold';
     stack.addControl(this._waveIdText);
 
     // Frequency
@@ -93,12 +93,12 @@ export default class SelectedWave {
     );
 
     // Remove button
-    const buttonRemoveWave = Button.CreateSimpleButton("buttonRemoveWave", "Remove");
+    const buttonRemoveWave = Button.CreateSimpleButton('buttonRemoveWave', 'Remove');
     buttonRemoveWave.paddingTopInPixels = 8;
     buttonRemoveWave.widthInPixels = elementWidth;
-    buttonRemoveWave.height = "40px";
-    buttonRemoveWave.background = "darkred";
-    buttonRemoveWave.color = "white";
+    buttonRemoveWave.height = '40px';
+    buttonRemoveWave.background = 'darkred';
+    buttonRemoveWave.color = 'white';
     buttonRemoveWave.cornerRadius = 4;
     buttonRemoveWave.onPointerUpObservable.add(() => {
       if (this._wave) {

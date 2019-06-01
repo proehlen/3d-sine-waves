@@ -113,7 +113,7 @@ export default class App {
     });
 
     // Watch for browser/canvas resize events
-    window.addEventListener("resize", () => { 
+    window.addEventListener('resize', () => { 
       this._engine.resize();
     });
 

@@ -13,10 +13,10 @@ export default class Gui {
   constructor(onAdd: () => void, onRemove: (wave: Wave) => void) {
     // GUI
     const advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI('UI');
-    const mainContainer = new Container("mainContainer");
-    const mainContainerPadding = "3%";
-    mainContainer.width = "100%";
-    mainContainer.height = "100%";
+    const mainContainer = new Container('mainContainer');
+    const mainContainerPadding = '3%';
+    mainContainer.width = '100%';
+    mainContainer.height = '100%';
     mainContainer.paddingLeft = mainContainerPadding;
     mainContainer.paddingRight = mainContainerPadding;
     mainContainer.paddingTop = mainContainerPadding;
@@ -26,18 +26,18 @@ export default class Gui {
     const toolbar = new Container('toolbarWave');
     toolbar.verticalAlignment = Control.VERTICAL_ALIGNMENT_TOP;
     toolbar.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
-    toolbar.background = "white";
+    toolbar.background = 'white';
     toolbar.adaptWidthToChildren = true;
     toolbar.adaptHeightToChildren = true;
     toolbar.paddingLeftInPixels = 10;
     toolbar.paddingTopInPixels = 10;
 
-    const buttonAddWave = Button.CreateSimpleButton("buttonAddWave", "Add");
+    const buttonAddWave = Button.CreateSimpleButton('buttonAddWave', 'Add');
     buttonAddWave.widthInPixels = elementWidth;
-    buttonAddWave.height = "40px";
-    buttonAddWave.color = "white";
+    buttonAddWave.height = '40px';
+    buttonAddWave.color = 'white';
     buttonAddWave.cornerRadius = 4;
-    buttonAddWave.background = "green";
+    buttonAddWave.background = 'green';
     buttonAddWave.onPointerUpObservable.add(() => {
       onAdd();
     });

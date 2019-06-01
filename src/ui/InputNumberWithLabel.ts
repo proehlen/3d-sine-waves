@@ -8,9 +8,9 @@ export default class InputNumberWithLabel {
     container: Container,
     onChange: (value: number) => void,
     widthInPixels: number = 130,
-    color: string = "black",
-    background: string = "white",
-    focusedBackground: string = "lightblue",
+    color: string = 'black',
+    background: string = 'white',
+    focusedBackground: string = 'lightblue',
   ) {
     const textBlock = new TextBlock(undefined, `${label}:`);
     textBlock.color = color;
@@ -35,23 +35,23 @@ export default class InputNumberWithLabel {
     this._inputText.onBlurObservable.add((eventData: InputText) => onChange(Number(eventData.text)));
 
     // Increase button
-    const buttonIncrease = Button.CreateSimpleButton("buttonIncrease", "+");
+    const buttonIncrease = Button.CreateSimpleButton('buttonIncrease', '+');
     buttonIncrease.widthInPixels = 18;
     buttonIncrease.heightInPixels = 18;
-    buttonIncrease.background = "lightgrey";
+    buttonIncrease.background = 'lightgrey';
     buttonIncrease.fontSize = 12;
-    buttonIncrease.fontWeight = "bold";
+    buttonIncrease.fontWeight = 'bold';
     buttonIncrease.onPointerUpObservable.add(() => {
       onChange(Number(this._inputText.text) + 1);
     });
 
     // Decrease button
-    const buttonDecrease = Button.CreateSimpleButton("buttonDecrease", "-");
+    const buttonDecrease = Button.CreateSimpleButton('buttonDecrease', '-');
     buttonDecrease.widthInPixels = 18;
     buttonDecrease.heightInPixels = 18;
-    buttonDecrease.background = "lightgrey";
+    buttonDecrease.background = 'lightgrey';
     buttonDecrease.fontSize = 12;
-    buttonDecrease.fontWeight = "bold";
+    buttonDecrease.fontWeight = 'bold';
     buttonDecrease.onPointerUpObservable.add(() => {
       onChange(Number(this._inputText.text) - 1);
     });

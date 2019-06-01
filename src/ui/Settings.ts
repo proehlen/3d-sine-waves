@@ -13,14 +13,14 @@ export default class Settings {
     this._container.heightInPixels = panelHeight;
 
     // Show settings button
-    const buttonSettings = Button.CreateSimpleButton("buttonSettings", "\u2699");
+    const buttonSettings = Button.CreateSimpleButton('buttonSettings', '\u2699');
     buttonSettings.verticalAlignment = Control.VERTICAL_ALIGNMENT_TOP
     buttonSettings.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT
     buttonSettings.paddingTopInPixels = 8;
     buttonSettings.widthInPixels = 40;
     buttonSettings.heightInPixels = 40;
-    buttonSettings.background = "blue";
-    buttonSettings.color = "white";
+    buttonSettings.background = 'blue';
+    buttonSettings.color = 'white';
     buttonSettings.cornerRadius = 4;
     buttonSettings.onPointerUpObservable.add(() => {
       alert('Settings panel under construction.');
