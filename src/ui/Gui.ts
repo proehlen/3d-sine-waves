@@ -10,7 +10,7 @@ const elementWidth = 160;
 export default class Gui {
   private _selectedWave: SelectedWave;
 
-  constructor(onAdd: () => void, onRemove: (wave: Wave) => void) {
+  constructor(onAdd: () => void, onRemove: (wave: Wave) => void, onClose: (wave: Wave) => void) {
     // GUI
     const advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI('UI');
     const mainContainer = new Container('mainContainer');
@@ -50,6 +50,9 @@ export default class Gui {
       mainContainer,
       (wave: Wave) => {
         onRemove(wave);
+      },
+      (wave: Wave) => {
+        onClose(wave);
       },
       elementWidth,
     );

@@ -88,7 +88,8 @@ export default class App {
     // Set up GUI
     this._gui = new Gui(
       () => this._addWave(),
-      (wave: Wave) => this._removeWave(wave)
+      (wave: Wave) => this._removeWave(wave),
+      (wave: Wave) => this._closeWave(wave),
     );
 
     // On wave origin select, set selected wave
@@ -162,6 +163,21 @@ export default class App {
     this._waveOrigins.delete(wave);
     this._waves.delete(wave.id);
     this.update();
+  }
+
+  _closeWave(wave: Wave) {
+    this._gui.selectedWave = undefined;
+    const waveOrigin = this._waveOrigins.get(wave);
+    if (waveOrigin) {
+      waveOrigin.isSelected = false;
+    }
+    // const waveOrigin = this._waveOrigins.get(wave);
+    // if (waveOrigin) {
+    //   waveOrigin.dispose();
+    // }
+    // this._waveOrigins.delete(wave);
+    // this._waves.delete(wave.id);
+    // this.update();
   }
 
   public update() {
