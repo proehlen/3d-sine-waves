@@ -15,6 +15,7 @@ export default class Wave {
   private _frequency: number;
   private _amplitude: number;
   private _resolution: number;
+  private _halfRectification: boolean;
   private _phase: number;
   private _onChange?: () => void;
 
@@ -24,6 +25,7 @@ export default class Wave {
     frequency: number,
     amplitude: number,
     resolutionAsPointsPerCircleUnit: number,
+    halfRectification?: boolean,
     phase?: number,
     onChange?: () => void,
   ) {
@@ -33,6 +35,7 @@ export default class Wave {
     this._frequency = frequency;
     this._amplitude = amplitude;
     this._resolution = resolutionAsPointsPerCircleUnit;
+    this._halfRectification = halfRectification || false;
     this._phase = phase || (Math.PI / 2);
     this._onChange = onChange;
   }
@@ -77,6 +80,14 @@ export default class Wave {
     this._fireChange();
   }
 
+  get halfRectification(): boolean {
+    return this._halfRectification;
+  }
+
+  set halfRectification(on: boolean) {
+    this._halfRectification = on;
+  }
+
   get phase(): number {
     return this._phase;
   }
@@ -97,7 +108,12 @@ export default class Wave {
     const distanceY = pointY - this._originY;
     const distance = Math.sqrt((distanceX ** 2) + (distanceY ** 2));
     const time = (distance / this._resolution);
-    return this._amplitude * Math.sin(((2 * Math.PI) * this._frequency * time) + this._phase);
+    const height = this._amplitude * Math.sin(((2 * Math.PI) * this._frequency * time) + this._phase);
+    if (this._halfRectification) {
+      return (height >= 0) ? height : 0;
+    } else {
+      return height;
+    }
   }
 
   public setOrigin(originX: number, originY: number) {

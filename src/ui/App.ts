@@ -130,9 +130,10 @@ export default class App {
     const wave = new Wave(
       randomOriginXorY(),
       randomOriginXorY(),
-      Math.random() * 2 + 1,
+      Math.round(Math.random() * 4 + 1),
       10,
       this._resolution,
+      false,
       Math.PI / 2,
       this.update.bind(this),
     );
