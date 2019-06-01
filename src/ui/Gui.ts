@@ -64,8 +64,8 @@ export default class Gui {
     );
 
     const buttonGithub = Button.CreateImageOnlyButton('buttonGithub', 'assets/GitHubLogo.png');
-    buttonGithub.widthInPixels = 48;
-    buttonGithub.heightInPixels = 48;
+    buttonGithub.widthInPixels = 32;
+    buttonGithub.heightInPixels = 32;
     buttonGithub.thickness = 0;
     buttonGithub.verticalAlignment = Control.VERTICAL_ALIGNMENT_TOP;
     buttonGithub.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
