@@ -13,6 +13,15 @@ export default class Gui {
   constructor(onAdd: () => void, onRemove: (wave: Wave) => void) {
     // GUI
     const advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI('UI');
+    const mainContainer = new Container("mainContainer");
+    const mainContainerPadding = "3%";
+    mainContainer.width = "100%";
+    mainContainer.height = "100%";
+    mainContainer.paddingLeft = mainContainerPadding;
+    mainContainer.paddingRight = mainContainerPadding;
+    mainContainer.paddingTop = mainContainerPadding;
+    mainContainer.paddingBottom = mainContainerPadding;
+    advancedTexture.addControl(mainContainer);
 
     const toolbar = new Container('toolbarWave');
     toolbar.verticalAlignment = Control.VERTICAL_ALIGNMENT_TOP;
@@ -35,10 +44,10 @@ export default class Gui {
     toolbar.addControl(buttonAddWave);  
 
 
-    advancedTexture.addControl(toolbar);  
+    mainContainer.addControl(toolbar);  
 
     this._selectedWave = new SelectedWave(
-      advancedTexture,
+      mainContainer,
       (wave: Wave) => {
         onRemove(wave);
       },
@@ -46,7 +55,7 @@ export default class Gui {
     );
 
     new Settings(
-      advancedTexture,
+      mainContainer,
       elementWidth,
     );
   }

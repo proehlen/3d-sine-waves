@@ -1,10 +1,9 @@
-import { AdvancedDynamicTexture, Container, StackPanel, Control, Button } from '@babylonjs/gui';
+import { Container, StackPanel, Control, Button } from '@babylonjs/gui';
 
 export default class Settings {
   _container: Container;
 
-  constructor(parent: AdvancedDynamicTexture, elementWidth: number) {
- 	// &#x2699;
+  constructor(parent: Container, elementWidth: number) {
     const panelWidth = elementWidth + 20;
     const panelHeight = elementWidth + 300;
     this._container = new Container();
@@ -12,8 +11,6 @@ export default class Settings {
     this._container.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
     this._container.widthInPixels = panelWidth;
     this._container.heightInPixels = panelHeight;
-    this._container.paddingRightInPixels = 10;
-    this._container.paddingTopInPixels = 10;
 
     // Show settings button
     const buttonSettings = Button.CreateSimpleButton("buttonSettings", "\u2699");

@@ -1,4 +1,4 @@
-import { Container, Control, TextBlock, AdvancedDynamicTexture, StackPanel, InputText, Button } from '@babylonjs/gui';
+import { Container, Control, TextBlock, StackPanel, InputText, Button } from '@babylonjs/gui';
 import Wave from '@/api/Wave';
 import InputNumberWithLabel from './InputNumberWithLabel';
 
@@ -14,7 +14,7 @@ export default class SelectedWave {
   private _originX: InputNumberWithLabel;
   private _originY: InputNumberWithLabel;
 
-  constructor(parent: AdvancedDynamicTexture, onRemove: (wave: Wave) => void, elementWidth: number) {
+  constructor(parent: Container, onRemove: (wave: Wave) => void, elementWidth: number) {
     const panelWidth = elementWidth + 20;
     this._container = new Container();
     this._container.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
