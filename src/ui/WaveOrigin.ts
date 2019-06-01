@@ -15,6 +15,7 @@ export default class WaveOrigin {
   private _positionGizmo: PositionGizmo | null;
   private _observable: any;
   private _gizmoManager: GizmoManager;
+  private _isSelected: boolean
 
   constructor(
     wave: Wave,
@@ -23,6 +24,7 @@ export default class WaveOrigin {
   ) {
     this._wave = wave;
     this._isDisposed = false;
+    this._isSelected = false;
     this._gizmoManager = gizmoManager;
     this._sphereMesh = MeshBuilder.CreateSphere(
       `waveOrigin-${wave.id}`,
@@ -42,10 +44,8 @@ export default class WaveOrigin {
     this._lineMesh = MeshBuilder.CreateLines('centerLine', { points: this._linePoints, updatable: false }, scene);
     this._lineMesh.parent = this._sphereMesh;
 
-    // gizmoManager.attachableMeshes = [...gizmoManager.attachableMeshes || [], this._sphereMesh];
-    gizmoManager.attachToMesh(this._sphereMesh);
-    gizmoManager.usePointerToAttachGizmos = true;
-    this._positionGizmo = gizmoManager.gizmos.positionGizmo;
+    this.isSelected = true;
+    this._positionGizmo = this._gizmoManager.gizmos.positionGizmo;
     if (this._positionGizmo) {
       this._observable = this._positionGizmo.onDragEndObservable.add(
         (): void => {
@@ -69,9 +69,17 @@ export default class WaveOrigin {
     this._sphereMesh.dispose();
     if (this._observable && this._positionGizmo) {
       this._positionGizmo.onDragEndObservable.remove(this._observable);
-      this._gizmoManager.attachToMesh(null);
+      this.isSelected = false;
     }
     this._isDisposed = true;
-    this._gizmoManager.usePointerToAttachGizmos = true;
+  }
+
+  set isSelected (selected: boolean) {
+    if (selected) {
+      this._gizmoManager.attachToMesh(this._sphereMesh);
+    } else {
+      this._gizmoManager.attachToMesh(null);
+    }
+    this._isSelected = selected;
   }
 }

@@ -33,7 +33,6 @@ export default class App {
   private _resolution: number; // Resolution as points per circle unit
   private _gui: Gui;
 
-
   constructor(canvas: HTMLCanvasElement, resolution: number) {
     this._resolution = resolution;
 
@@ -50,12 +49,12 @@ export default class App {
     // Create gizmo manager
     this._gizmoManager = new GizmoManager(this._scene);
     this._gizmoManager.positionGizmoEnabled = true;
+    this._gizmoManager.usePointerToAttachGizmos = false;
     if (this._gizmoManager.gizmos.positionGizmo) {
       this._gizmoManager.gizmos.positionGizmo.zGizmo.dispose();
     }
 
     // This creates and positions a free camera (non-mesh)
-    // const camera = new UniversalCamera('camera1', new Vector3(0, 5, -10), this._scene);
     const camera = new ArcRotateCamera('camera1', 1.57, 2.17, (resolution * 2) * 1.5, new Vector3(0, 0, 0), this._scene);
 
     // This targets the camera to scene origin
@@ -76,8 +75,6 @@ export default class App {
     for (let x = -maxOffsetFromCenter; x <= maxOffsetFromCenter; x++) {
       const column = [];
       for (let y = -maxOffsetFromCenter; y <= maxOffsetFromCenter; y++) {
-        // const z = wave.getHeightAtPoint({ x, y });
-        // console.log(z);
         column.push(new Vector3(x, y, 0));
       }
       this._pathArray.push(column);
@@ -106,6 +103,11 @@ export default class App {
             const wave = this._waves.get(Number(maybeWaveId));
             if (wave) {
               this._gui.selectedWave = wave;
+
+              const waveOrigin = this._waveOrigins.get(wave);
+              if (waveOrigin) {
+                waveOrigin.isSelected = true;
+              }
             }
           }
         }
@@ -142,10 +144,6 @@ export default class App {
       wave,
       this._scene,
       this._gizmoManager,
-      // (wave: Wave) => {
-      //   debugger;
-      //   this._gui.selectedWave = wave;
-      // },
     );
     this._waveOrigins.set(wave, waveOrigin);
     this._gui.selectedWave = wave;
@@ -177,13 +175,6 @@ export default class App {
     this._ribbon = MeshBuilder.CreateRibbon(ribbonName, { pathArray: this._pathArray, instance: this._ribbon });
 
     this._gui.update();
-    // this._waveOrigins.forEach((waveOrigin) => waveOrigin.dispose());
-    // this._waveOrigins = Array.from(this._waves.values())
-    //   .map((wave) => new WaveOrigin(wave, this._scene, this._gizmoManager.gizmos.positionGizmo));
-
-    // this._gizmoManager.attachableMeshes = this
-    //   ._waveOrigins
-    //   .map((waveOrigin) => waveOrigin.sphereMesh);
   }
 
   public destroy(): void {
