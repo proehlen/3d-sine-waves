@@ -136,7 +136,7 @@ export default class App {
     const wave = new Wave(
       randomOriginXorY(),
       randomOriginXorY(),
-      Math.round(Math.random() * 4 + 1),
+      Math.round(Math.random() * 3 + 2),
       10,
       this._resolution,
       false,
