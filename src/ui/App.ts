@@ -7,9 +7,6 @@ import { Mesh } from '@babylonjs/core/Meshes/mesh';
 import { GizmoManager } from '@babylonjs/core/Gizmos';
 import { init as initMaterials } from './materials';
 
-// import '@babylonjs/core/Debug/debugLayer';
-// import '@babylonjs/inspector';
-
 import Gui from './Gui';
 import Wave from '../api/Wave';
 import WaveOrigin from './WaveOrigin';
@@ -86,6 +83,7 @@ export default class App {
     // Create ribbon with updatable parameter set to true for later changes
     this._ribbon = MeshBuilder.CreateRibbon(
       ribbonName, {pathArray: this._pathArray, sideOrientation: Mesh.DOUBLESIDE, updatable: true}, this._scene);
+    this._ribbon.setMaterialByID('waves');
 
     // Set up GUI
     this._gui = new Gui(
