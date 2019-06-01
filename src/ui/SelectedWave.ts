@@ -2,7 +2,7 @@ import { Container, Control, TextBlock, StackPanel, InputText, Button } from '@b
 import Wave from '@/api/Wave';
 import InputNumberWithLabel from './InputNumberWithLabel';
 
-const panelHeight = 400;
+const panelHeight = 480;
 
 export default class SelectedWave {
   private _container: Container;
@@ -15,7 +15,7 @@ export default class SelectedWave {
   private _originY: InputNumberWithLabel;
 
   constructor(parent: Container, onRemove: (wave: Wave) => void, onClose: (wave: Wave) => void, elementWidth: number) {
-    const panelWidth = elementWidth + 20;
+    const panelWidth = elementWidth + 50;
     this._container = new Container();
     this._container.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
     this._container.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
@@ -30,7 +30,9 @@ export default class SelectedWave {
 
 
     const hStack = new Container();
-    hStack.heightInPixels = 24;
+    hStack.heightInPixels = 34;
+    hStack.paddingTopInPixels = 5;
+    hStack.paddingBottomInPixels = 5;
 
     this._waveIdText = new TextBlock('selectedWaveId', 'Wave');
     this._waveIdText.color = 'black';
@@ -123,9 +125,9 @@ export default class SelectedWave {
 
     // Remove button
     const buttonRemoveWave = Button.CreateSimpleButton('buttonRemoveWave', 'Remove');
-    buttonRemoveWave.paddingTopInPixels = 8;
+    buttonRemoveWave.paddingTopInPixels = 15;
     buttonRemoveWave.widthInPixels = elementWidth;
-    buttonRemoveWave.height = '40px';
+    buttonRemoveWave.heightInPixels = 47;
     buttonRemoveWave.background = 'darkred';
     buttonRemoveWave.color = 'white';
     buttonRemoveWave.cornerRadius = 4;

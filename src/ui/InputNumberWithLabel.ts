@@ -16,8 +16,9 @@ export default class InputNumberWithLabel {
   ) {
     const textBlock = new TextBlock(undefined, `${label}:`);
     textBlock.color = color;
-    textBlock.paddingTopInPixels = 5;
-    textBlock.heightInPixels = 30;
+    textBlock.paddingTopInPixels = 10;
+    textBlock.paddingBottomInPixels = 5;
+    textBlock.heightInPixels = 40;
     container.addControl(textBlock);
 
     let unitText: TextBlock | undefined;
@@ -30,7 +31,7 @@ export default class InputNumberWithLabel {
     this._inputText.color = color;
     this._inputText.background = background;
     this._inputText.heightInPixels = 34;
-    this._inputText.widthInPixels = widthInPixels - 30;
+    this._inputText.widthInPixels = widthInPixels - 20;
     if (unitText) {
       this._inputText.widthInPixels -= unitText.widthInPixels;
     }
