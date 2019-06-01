@@ -35,6 +35,7 @@ module.exports = {
     }),
     new CopyPlugin([
       { from: 'src/_config.yml' },
+      { from: 'src/assets', to: 'assets' },
     ]),
   ],
   resolve: {

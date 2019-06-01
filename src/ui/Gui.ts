@@ -37,6 +37,7 @@ export default class Gui {
     buttonAddWave.height = '40px';
     buttonAddWave.color = 'white';
     buttonAddWave.cornerRadius = 4;
+    buttonAddWave.thickness = 0;
     buttonAddWave.background = 'green';
     buttonAddWave.onPointerUpObservable.add(() => {
       onAdd();
@@ -61,6 +62,17 @@ export default class Gui {
       mainContainer,
       elementWidth,
     );
+
+    const buttonGithub = Button.CreateImageOnlyButton('buttonGithub', 'assets/GitHubLogo.png');
+    buttonGithub.widthInPixels = 48;
+    buttonGithub.heightInPixels = 48;
+    buttonGithub.thickness = 0;
+    buttonGithub.verticalAlignment = Control.VERTICAL_ALIGNMENT_TOP;
+    buttonGithub.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
+    buttonGithub.onPointerUpObservable.add(() => {
+      window.open('https://github.com/proehlen/3d-sine-waves', '_new');
+    });
+    mainContainer.addControl(buttonGithub);
   }
 
   set selectedWave(wave: Wave | undefined) {

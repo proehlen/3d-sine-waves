@@ -7,14 +7,13 @@ export default class Settings {
     const panelWidth = elementWidth + 20;
     const panelHeight = elementWidth + 300;
     this._container = new Container();
-    this._container.verticalAlignment = Control.VERTICAL_ALIGNMENT_TOP
+    this._container.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
     this._container.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
     this._container.widthInPixels = panelWidth;
-    this._container.heightInPixels = panelHeight;
 
     // Show settings button
     const buttonSettings = Button.CreateSimpleButton('buttonSettings', '\u2699');
-    buttonSettings.verticalAlignment = Control.VERTICAL_ALIGNMENT_TOP
+    buttonSettings.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
     buttonSettings.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT
     buttonSettings.paddingTopInPixels = 8;
     buttonSettings.widthInPixels = 40;
@@ -22,6 +21,7 @@ export default class Settings {
     buttonSettings.background = 'blue';
     buttonSettings.color = 'white';
     buttonSettings.cornerRadius = 4;
+    buttonSettings.thickness = 0;
     buttonSettings.onPointerUpObservable.add(() => {
       alert('Settings panel under construction.');
     });
