@@ -74,6 +74,11 @@ export default class WaveOrigin {
     this._isDisposed = true;
   }
 
+  public update() {
+    this._sphereMesh.position.x = this._wave.originX;
+    this._sphereMesh.position.y = this._wave.originY;
+  }
+
   set isSelected (selected: boolean) {
     if (selected) {
       this._gizmoManager.attachToMesh(this._sphereMesh);

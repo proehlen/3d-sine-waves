@@ -171,13 +171,6 @@ export default class App {
     if (waveOrigin) {
       waveOrigin.isSelected = false;
     }
-    // const waveOrigin = this._waveOrigins.get(wave);
-    // if (waveOrigin) {
-    //   waveOrigin.dispose();
-    // }
-    // this._waveOrigins.delete(wave);
-    // this._waves.delete(wave.id);
-    // this.update();
   }
 
   public update() {
@@ -193,6 +186,9 @@ export default class App {
     }
     this._ribbon = MeshBuilder.CreateRibbon(ribbonName, { pathArray: this._pathArray, instance: this._ribbon });
 
+    for (const [, waveOrigin] of this._waveOrigins) {
+      waveOrigin.update();
+    }
     this._gui.update();
   }
 

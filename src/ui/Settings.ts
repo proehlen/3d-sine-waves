@@ -17,6 +17,7 @@ export default class Settings {
     buttonSettings.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT
     buttonSettings.paddingTopInPixels = 8;
     buttonSettings.widthInPixels = 40;
+    buttonSettings.fontSize = 28;
     buttonSettings.heightInPixels = 40;
     buttonSettings.background = 'blue';
     buttonSettings.color = 'white';
