@@ -9,6 +9,7 @@ export default class InputNumberWithLabel {
     onChange: (value: number) => void,
     widthInPixels: number = 130,
     unit?: string,
+    step: number = 1,
     color: string = 'black',
     background: string = 'white',
     focusedBackground: string = 'lightblue',
@@ -52,7 +53,7 @@ export default class InputNumberWithLabel {
     buttonIncrease.fontSize = 12;
     buttonIncrease.fontWeight = 'bold';
     buttonIncrease.onPointerUpObservable.add(() => {
-      onChange(Number(this._inputText.text) + 1);
+      onChange(Number(this._inputText.text) + step);
     });
 
     // Decrease button
@@ -63,7 +64,7 @@ export default class InputNumberWithLabel {
     buttonDecrease.fontSize = 12;
     buttonDecrease.fontWeight = 'bold';
     buttonDecrease.onPointerUpObservable.add(() => {
-      onChange(Number(this._inputText.text) - 1);
+      onChange(Number(this._inputText.text) - step);
     });
 
 

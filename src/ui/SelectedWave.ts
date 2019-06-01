@@ -95,7 +95,8 @@ export default class SelectedWave {
         }
       },
       elementWidth,
-      'π'
+      'π',
+      0.1
     );
 
     // Origin X/Y

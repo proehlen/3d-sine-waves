@@ -7,6 +7,7 @@ export default class Settings {
     const panelWidth = elementWidth + 20;
     const panelHeight = elementWidth + 300;
     this._container = new Container();
+    this._container.isVisible = false;
     this._container.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
     this._container.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
     this._container.widthInPixels = panelWidth;
@@ -19,7 +20,7 @@ export default class Settings {
     buttonSettings.widthInPixels = 40;
     buttonSettings.fontSize = 28;
     buttonSettings.heightInPixels = 40;
-    buttonSettings.background = 'blue';
+    buttonSettings.background = '#007acc';
     buttonSettings.color = 'white';
     buttonSettings.cornerRadius = 4;
     buttonSettings.thickness = 0;

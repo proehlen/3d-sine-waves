@@ -32,7 +32,7 @@ export default class Gui {
     toolbar.paddingLeftInPixels = 10;
     toolbar.paddingTopInPixels = 10;
 
-    const buttonAddWave = Button.CreateSimpleButton('buttonAddWave', 'Add');
+    const buttonAddWave = Button.CreateSimpleButton('buttonAddWave', 'Add Wave');
     buttonAddWave.widthInPixels = elementWidth;
     buttonAddWave.height = '40px';
     buttonAddWave.color = 'white';
