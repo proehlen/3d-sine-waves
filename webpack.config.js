@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
-module.exports = {
+module.exports = env => ({
   mode: 'development',
   entry: {
     app: './src/index.ts',
@@ -28,7 +28,9 @@ module.exports = {
     contentBase: './docs',
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      dry: env.development,
+    }),
     new HtmlWebpackPlugin({
       title: 'Waves',
       template: 'src/index.html',
@@ -45,4 +47,4 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'docs')
   }
-};
+});
