@@ -140,7 +140,7 @@ export default class App {
       10,
       this._resolution,
       false,
-      Math.PI / 2,
+      0.5,
       this.update.bind(this),
     );
     this._waves.set(wave.id, wave);
@@ -151,7 +151,7 @@ export default class App {
     );
     this._waveOrigins.set(wave, waveOrigin);
     this._gui.selectedWave = wave;
-    this.update();
+    this.update(wave);
   }
 
   _removeWave(wave: Wave) {
@@ -162,7 +162,7 @@ export default class App {
     }
     this._waveOrigins.delete(wave);
     this._waves.delete(wave.id);
-    this.update();
+    this.update(wave);
   }
 
   _closeWave(wave: Wave) {
@@ -173,7 +173,7 @@ export default class App {
     }
   }
 
-  public update() {
+  public update(wave: Wave) {
     // Update z axis of all points to reflect current waves
     for (const row of this._pathArray) {
       for (const cell of row) {
@@ -186,7 +186,8 @@ export default class App {
     }
     this._ribbon = MeshBuilder.CreateRibbon(ribbonName, { pathArray: this._pathArray, instance: this._ribbon });
 
-    for (const [wave, waveOrigin] of this._waveOrigins) {
+    const waveOrigin = this._waveOrigins.get(wave);
+    if (waveOrigin) {
       waveOrigin.update();
     }
     this._gui.update();

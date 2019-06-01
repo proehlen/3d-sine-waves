@@ -8,6 +8,7 @@ export default class InputNumberWithLabel {
     container: Container,
     onChange: (value: number) => void,
     widthInPixels: number = 130,
+    unit?: string,
     color: string = 'black',
     background: string = 'white',
     focusedBackground: string = 'lightblue',
@@ -18,11 +19,20 @@ export default class InputNumberWithLabel {
     textBlock.heightInPixels = 30;
     container.addControl(textBlock);
 
+    let unitText: TextBlock | undefined;
+    if (unit) {
+      unitText = new TextBlock(undefined, unit);
+      unitText.widthInPixels = 25;
+    }
+
     this._inputText = new InputText();
     this._inputText.color = color;
     this._inputText.background = background;
     this._inputText.heightInPixels = 34;
     this._inputText.widthInPixels = widthInPixels - 30;
+    if (unitText) {
+      this._inputText.widthInPixels -= unitText.widthInPixels;
+    }
     this._inputText.focusedBackground = focusedBackground;
     this._inputText.onFocusSelectAll = true;
     this._inputText.onKeyboardEventProcessedObservable.add(
@@ -68,6 +78,9 @@ export default class InputNumberWithLabel {
     horizontalStack.heightInPixels = 34;
     horizontalStack.verticalAlignment = Control.VERTICAL_ALIGNMENT_CENTER;
     horizontalStack.addControl(this._inputText);
+    if (unitText) {
+      horizontalStack.addControl(unitText);
+    }
     horizontalStack.addControl(verticalStack);
 
     container.addControl(horizontalStack);
