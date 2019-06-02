@@ -3,6 +3,7 @@ import Wave from '@/api/Wave';
 import InputNumberWithLabel from './InputNumberWithLabel';
 
 const panelHeight = 480;
+const textColor = '#101010';
 
 export default class SelectedWave {
   private _container: Container;
@@ -19,7 +20,8 @@ export default class SelectedWave {
     this._container = new Container();
     this._container.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
     this._container.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_LEFT;
-    this._container.background = '#eaeaFF';
+    this._container.background = '#fcfcff';
+    this._container.color = textColor;
     this._container.widthInPixels = panelWidth;
     this._container.heightInPixels = panelHeight;
     this._container.paddingLeftInPixels = 10;
@@ -44,8 +46,10 @@ export default class SelectedWave {
 
     // Close button
     const buttonClose = Button.CreateSimpleButton('buttonClose', 'X');
-    buttonClose.widthInPixels = 34;
-    buttonClose.fontSize = 14;
+    buttonClose.widthInPixels = 30;
+    buttonClose.heightInPixels = 22;
+    buttonClose.fontSize = 12;
+    buttonClose.fontWeight = 'bold';
     buttonClose.background = '#FAFAFA';
     buttonClose.thickness = 1;
     buttonClose.color = "darkgrey";
@@ -72,6 +76,7 @@ export default class SelectedWave {
           this._wave.frequency = frequency;
         }
       },
+      textColor,
       elementWidth,
     );
 
@@ -84,6 +89,7 @@ export default class SelectedWave {
           this._wave.amplitude = amplitude;
         }
       },
+      textColor,
       elementWidth,
     );
 
@@ -96,6 +102,7 @@ export default class SelectedWave {
           this._wave.phase = phase;
         }
       },
+      textColor,
       elementWidth,
       'π',
       0.1
@@ -110,6 +117,7 @@ export default class SelectedWave {
           this._wave.originX = originX;
         }
       },
+      textColor,
       elementWidth,
     );
     this._originY = new InputNumberWithLabel(
@@ -120,6 +128,7 @@ export default class SelectedWave {
           this._wave.originY = originY;
         }
       },
+      textColor,
       elementWidth,
     );
 

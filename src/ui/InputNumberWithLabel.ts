@@ -7,14 +7,14 @@ export default class InputNumberWithLabel {
     label: string,
     container: Container,
     onChange: (value: number) => void,
+    color: string,
     widthInPixels: number = 130,
     unit?: string,
     step: number = 1,
-    color: string = 'black',
     background: string = 'white',
     focusedBackground: string = 'lightblue',
   ) {
-    const textBlock = new TextBlock(undefined, `${label}:`);
+    const textBlock = new TextBlock(undefined, label);
     textBlock.color = color;
     textBlock.paddingTopInPixels = 10;
     textBlock.paddingBottomInPixels = 5;
