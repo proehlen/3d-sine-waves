@@ -4,7 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = env => ({
-  mode: 'development',
+  mode: env.development ? 'development' : 'production',
   entry: {
     app: './src/index.ts',
   },
